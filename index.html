@@ -2,11 +2,23 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Projeto MiniMercado PUCRS</title>
+    <title>MiniMercado PUCRS</title>
     <style>
-        header, footer {text-align: center;}
-        .container { text-align: center; }
-        .produto, .servico { text-align: center; }
+        body { font-family: Arial, sans-serif; margin: 0;  text-align: center; padding: 0; background-color: #f5f5dc;}
+        header, footer { background: #4CAF50; color: white; text-align: center; padding: 15px; }
+        .container { width: 80%; margin: auto; padding: 20px;text-align: center;}
+        .produto, .servico { border: 1px solid #ddd; padding: 15px; margin: 10px; text-align: center; }
+        .grid { display: flex; flex-wrap: wrap; justify-content: space-around; }
+        .form-container { max-width: 500px; margin: auto; background: #f4f4f4; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px #aaa; }
+        input, select { width: 100%; padding: 10px; margin: 5px 0; box-sizing: border-box; }
+        .form-group { text-align: left; margin-bottom: 10px;}
+        button { background-color: #4CAF50; color: white; margin: 10px; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        .radio-group { display: block; margin-bottom: 15px; text-align: left; }
+        .radio-group input { margin: 0 15px 0 0;}
+        .radio-group label { display: inline-block; margin-right: 15px; font-size: 16px; }
+        section#cadastro, section#agendamento { margin-bottom: 40px;}
+        .carousel img { max-height: 200px; width: auto; display: block; margin: auto; }
     </style>
 </head>
 <body>
@@ -14,74 +26,137 @@
         <h1>MiniMercado</h1>
         <nav>
             <a href="#frutas">Frutas e Verduras</a> |
-            <a href="#alimenticios">Produtos Alimentícios</a> |
+            <a href="#alimenticios">Alimentícios</a> |
             <a href="#higiene">Higiene e Limpeza</a> |
-            <a href="#servicos">Serviços</a>
-        <hr/>
+            <a href="#servicos">Serviços</a> |
+            <a href="#cadastro">Cadastro</a> |
+            <a href="#agendamento">Agendamento</a>
         </nav>
     </header>
     
     <div class="container">
+        <!-- Carrossel de Frutas -->
         <section id="frutas">
             <h2>Frutas e Verduras</h2>
-            <div class="grid">
-                <div class="produto">
-                    <img src="banana.jpg" alt="Banana" width="150">
-                    <p>Banana - R$ 5,00/kg</p>
-                </div>
-                <div class="produto">
-                    <img src="alface.jpg" alt="Alface" width="150">
-                    <p>Alface - R$ 5,99/unidade</p>
-                </div>
+            <div class="carousel">
+                <img id="img-frutas" src="banana.jpg" alt="Imagem de bananas maduras">
+                <p id="texto-frutas">Banana - R$ 5,00/kg</p>
+                <button onclick="trocarImagem('frutas', -1)">Anterior</button>
+                <button onclick="trocarImagem('frutas', 1)">Próximo</button>
             </div>
         </section>
-        
+
+        <!-- Carrossel de Produtos Alimentícios -->
         <section id="alimenticios">
             <h2>Produtos Alimentícios Não Perecíveis</h2>
-            <div class="grid">
-                <div class="produto">
-                    <img src="arroz.jpg" alt="Arroz" width="150">
-                    <p>Arroz - R$ 28,90/5kg</p>
-                </div>
-                <div class="produto">
-                    <img src="feijao.jpg" alt="Feijão" width="110">
-                    <p>Feijão - R$ 6,00/kg</p>
-                </div>
+            <div class="carousel">
+                <img id="img-alimentos" src="arroz.jpg" alt="Pacote de arroz de 5kg">
+                <p id="texto-alimentos">Arroz - R$ 28,90/5kg</p>
+                <button onclick="trocarImagem('alimentos', -1)">Anterior</button>
+                <button onclick="trocarImagem('alimentos', 1)">Próximo</button>
             </div>
         </section>
-        
+
+        <!-- Carrossel de Produtos de Higiene -->
         <section id="higiene">
             <h2>Produtos de Higiene e Limpeza</h2>
-            <div class="grid">
-                <div class="produto">
-                    <img src="sabao.jpg" alt="Sabão em pó" width="150">
-                    <p>Sabão em pó - R$ 22,50/1kg</p>
-                </div>
-                <div class="produto">
-                    <img src="detergente.jpg" alt="Detergente" width="150">
-                    <p>Detergente - R$ 15,00/unidade</p>
-                </div>
+            <div class="carousel">
+                <img id="img-higiene" src="sabao.jpg" alt="Sabão em pó embalagem de 1kg">
+                <p id="texto-higiene">Sabão em pó - R$ 22,50/1kg</p>
+                <button onclick="trocarImagem('higiene', -1)">Anterior</button>
+                <button onclick="trocarImagem('higiene', 1)">Próximo</button>
+            </div>
+        </section>
+
+        <!-- Serviços -->
+        <section id="servicos">
+            <h2>Serviços</h2>
+            <div>
+                <button onclick="window.location.href='#agendamento'">Retirada no local - Gratuito</button>
+                <button onclick="window.location.href='#agendamento'">Tele-entrega - R$ 10,00</button>
+            </div>
+        </section>
+
+        <!-- Formulários -->
+        <section id="cadastro">
+            <h2>Cadastro</h2>
+            <div class="form-container">
+                <form>
+                    <input type="text" placeholder="Nome Completo" required>
+                    <input type="text" placeholder="CPF" required>
+                    <input type="tel" placeholder="Telefone" required>
+                    <input type="email" placeholder="E-mail" required>
+                    <input type="text" placeholder="Endereço" required>
+                    <div class="radio-group">
+                        <label>Sexo:</label>
+                        <input type="radio" name="sexo" value="Masculino"> Masculino
+                        <input type="radio" name="sexo" value="Feminino"> Feminino
+                    </div>
+                    <input type="checkbox" required> Aceito os termos e condições<br>
+                    <button type="submit">Cadastrar</button>
+                </form>
             </div>
         </section>
         
-        <section id="servicos">
-            <h2>Serviços</h2>
-            <div class="grid">
-                <div class="servico">
-                    <p>Retirada no local - Gratuito</p>
-                </div>
-                <div class="servico">
-                    <p>Tele-entrega - R$ 10,00</p>
-                </div>
+        <!-- Agendamento -->
+        <section id="agendamento">
+            <h2>Agendamento</h2>
+            <div class="form-container">
+                <form>
+                    <div class="radio-group">
+                        <input type="radio" id="retirada" name="metodo" checked> Retirada no Local
+                        <input type="radio" id="entrega" name="metodo"> Tele-entrega
+                    </div>
+                    <input type="datetime-local" id="data-retirada" required>
+                    <input type="datetime-local" id="data-entrega" style="display:none;">
+                    <button type="submit">Agendar</button>
+                </form>
             </div>
         </section>
     </div>
     
     <footer>
-        <hr/>
         <p>Projeto MiniMercado - PUCRS</p>
         <p>Contato: (99) 99999-9999 | Email: projetominimercado@hotmail.com</p>
     </footer>
+
+    <script>
+        const carrosseis = {
+            frutas: [
+                { src: "banana.jpg", texto: "Banana - R$ 5,00/kg", alt: "Imagem de bananas maduras" },
+                { src: "alface.jpg", texto: "Alface - R$ 5,99/unidade", alt: "Imagem de um maço de alface fresco" }
+        ]   ,
+            alimentos: [
+                { src: "arroz.jpg", texto: "Arroz - R$ 28,90/5kg", alt: "Pacote de arroz de 5kg" },
+                { src: "feijao.jpg", texto: "Feijão - R$ 6,00/kg", alt: "Pacote de feijão preto de 1kg" }
+            ],
+            higiene: [
+                { src: "sabao.jpg", texto: "Sabão em pó - R$ 22,50/1kg", alt: "Sabão em pó embalagem de 1kg" },
+                { src: "detergente.jpg", texto: "Detergente - R$ 15,00/unidade", alt: "Frasco de detergente líquido de 500ml" }
+            ]
+        };
+
+        let indices = { frutas: 0, alimentos: 0, higiene: 0 };
+        let intervalos = {};
+
+        function trocarImagem(categoria, direcao) {
+            const lista = carrosseis[categoria];
+            indices[categoria] = (indices[categoria] + direcao + lista.length) % lista.length;
+            atualizarCarrossel(categoria);
+            reiniciarCarrossel(categoria);
+        }
+
+        function atualizarCarrossel(categoria) {
+            const imgElement = document.getElementById(`img-${categoria}`);
+            const textElement = document.getElementById(`texto-${categoria}`);
+            const item = carrosseis[categoria][indices[categoria]];
+
+            imgElement.src = item.src;
+            imgElement.alt = item.alt;
+            textElement.textContent = item.texto;
+        }
+
+        Object.keys(carrosseis).forEach(iniciarCarrossel);
+    </script>
 </body>
 </html>
-
